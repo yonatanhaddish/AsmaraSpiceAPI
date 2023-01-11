@@ -137,6 +137,36 @@ router.put("/:id", function (req, res, next) {
   );
 });
 
+// Delete a signle pie by a specific given id 
+router.delete('/:id', function (req, res, next) {
+  pieRepos.getById(req.params.id, function (data) {
+
+    if (data) {
+      pieRepos.delete(req.params.id, function (data) {
+        res.status(200).json({
+          "status": 200,
+          "statusText": "OK",
+          "message": `The pie ${req.params.id} is deleted`,
+          "data": `Pie ${req.params.id} deleted`
+        })
+      })
+    }
+    else {
+      res.status(404).json({
+        "status": 404,
+        "statusText": "Not Found",
+        "message": `The pie ${req.params.id} could not be found`,
+        "error": {
+          "code": "NOT_FOUND",
+          "message": `The pie ${req.params.id} could not be found`
+        }
+      })
+    }
+  }, function (err) {
+    next(err);
+  })
+})
+
 // Configure router so all routes are prefixed with /api/v1
 app.use("/api/", router);
 
