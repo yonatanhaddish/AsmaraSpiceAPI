@@ -1,1 +1,26 @@
-[{"id":1,"name":"Apple","wholePrice":19.99,"slicePrice":4.99,"sliceCalories":67,"imageUrl":"images/apple.jpg"},{"id":2,"name":"Cherry","wholePrice":29.99,"slicePrice":5.99,"sliceCalories":72,"imageUrl":"images/cherry.jpg"},{"id":4,"name":"Coco","wholePrice":14.99,"slicePrice":3.99,"sliceCalories":12,"imageUrl":"images/coco.jpg"}]
+[
+    {
+        "id": 1,
+        "name": "Apple",
+        "wholePrice": 24.99,
+        "slicePrice": 3.99,
+        "sliceCalories": 12,
+        "imageUrl": "images/apple.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Cherry",
+        "wholePrice": 29.99,
+        "slicePrice": 5.99,
+        "sliceCalories": 72,
+        "imageUrl": "images/cherry.jpg"
+    },
+    {
+        "id": 4,
+        "name": "Coco",
+        "wholePrice": 14.99,
+        "slicePrice": 3.99,
+        "sliceCalories": 12,
+        "imageUrl": "images/coco.jpg"
+    }
+]
