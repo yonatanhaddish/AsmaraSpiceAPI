@@ -3,6 +3,7 @@ let express = require("express");
 let app = express();
 
 let pieRepos = require("./repos/pieRepos");
+let errorHelpers = require("./helpers/errorHelpers");
 
 // Use the express Router object
 let router = express.Router();
@@ -200,43 +201,14 @@ router.delete('/:id', function (req, res, next) {
 // Configure router so all routes are prefixed with /api/v1
 app.use("/api/", router);
 
-function errorBuilder(err) {
-  return {
-    "status": 500,
-    "statusText": "Internal Server Error",
-    "message": err.message,
-    "error": {
-      "errno": err.errno,
-      "call": err.syscall,
-      "code": "INTERNAL_SERVER_ERROR",
-      "message": err.message
-    }
-  }
-}
+// Configure exception logger to console
+app.use(errorHelpers.logErrorsToConsole);
+// Configure client error handler
+app.use(errorHelpers.clientErrorHandler);
+// Configure catch-all exception middleware last
+app.use(errorHelpers.errorHandler);
 
-// Configure exception middleware last
-// app.use(function(err, req, res, next) {
-//   res.status(500).json({
-//     "status": 500,
-//     "statusText": "Internal Server Error",
-//     "message": err.message,
-//     "error": {
-//       "code": "INTERNAL_SERVER_ERROR",
-//       "message": err.message
-//     }
-//   });
-// });
 
-// Configure exception logger
-app.use(function(err, req, res, next) {
-  console.log(errorBuilder(err));
-  next(err);
-})
-
-// Configure exception middleware [custom made function(errorBuilder)]
-app.use(function(err, req, res, next) {
-  res.status(500).json(errorBuilder(err));
-})
 
 // Create server to listen on post 5000
 var server = app.listen(5000, function () {
