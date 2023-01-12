@@ -200,6 +200,44 @@ router.delete('/:id', function (req, res, next) {
 // Configure router so all routes are prefixed with /api/v1
 app.use("/api/", router);
 
+function errorBuilder(err) {
+  return {
+    "status": 500,
+    "statusText": "Internal Server Error",
+    "message": err.message,
+    "error": {
+      "errno": err.errno,
+      "call": err.syscall,
+      "code": "INTERNAL_SERVER_ERROR",
+      "message": err.message
+    }
+  }
+}
+
+// Configure exception middleware last
+// app.use(function(err, req, res, next) {
+//   res.status(500).json({
+//     "status": 500,
+//     "statusText": "Internal Server Error",
+//     "message": err.message,
+//     "error": {
+//       "code": "INTERNAL_SERVER_ERROR",
+//       "message": err.message
+//     }
+//   });
+// });
+
+// Configure exception logger
+app.use(function(err, req, res, next) {
+  console.log(errorBuilder(err));
+  next(err);
+})
+
+// Configure exception middleware [custom made function(errorBuilder)]
+app.use(function(err, req, res, next) {
+  res.status(500).json(errorBuilder(err));
+})
+
 // Create server to listen on post 5000
 var server = app.listen(5000, function () {
   console.log("Node server is running on http://localhost:5000..");
