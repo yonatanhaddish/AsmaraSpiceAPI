@@ -203,10 +203,14 @@ app.use("/api/", router);
 
 // Configure exception logger to console
 app.use(errorHelpers.logErrorsToConsole);
+// Configure exception logger to file
+app.use(errorHelpers.logErrorsToFile);
 // Configure client error handler
 app.use(errorHelpers.clientErrorHandler);
 // Configure catch-all exception middleware last
 app.use(errorHelpers.errorHandler);
+
+
 
 
 

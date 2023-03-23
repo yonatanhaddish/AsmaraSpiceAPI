@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: asmara-spice-api
+  description: This is an API of Asmara Spice Co.
+  tags:
+    - go
+    - website
+spec:
+  type: service
+  lifecycle: production
+  owner: Yo-Group

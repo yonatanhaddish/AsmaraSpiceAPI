@@ -1,0 +1,4 @@
+********************************************************************************
+Date/Time: 2023-01-12
+Exception Info: {"status":500,"statusText":"Internal Server Error","message":"repeat is not defined","error":{"code":"INTERNAL_SERVER_ERROR","message":"repeat is not defined"},"requestInfo":{"hostname":"localhost","path":"/api/1"}}
+********************************************************************************
